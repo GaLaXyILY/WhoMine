@@ -28,7 +28,14 @@ jobs:
         distribution: 'temurin'
     - name: Run chmod to make gradlew executable
       run: chmod +x ./gradlew
-    - name: Build with Gradle
-      uses: gradle/actions/setup-gradle@v3
+    - name: Build Jar 
+      run: | 
+         ./gradlew build 
+          mkdir -p ${{ github.workspace }}/artifacts 
+          mv target/*.jar ${{ github.workspace }}/artifacts/ 
+    - name: Upload all artifacts
+      uses: actions/upload-artifact@v4
       with:
-        arguments: build --refresh-dependencies
+          name: mm
+          path: artifacts/*.jar
+        
