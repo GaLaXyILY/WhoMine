@@ -28,7 +28,7 @@ jobs:
         distribution: 'temurin'
     - name: Run chmod to make gradlew executable
       run: chmod +x ./gradlew
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v3
     - name: Build with Gradle
-      uses: gradle/actions/setup-gradle@v3.5.0
-      with:
-        arguments: build --refresh-dependencies
+      run: ./gradlew build --refresh-dependencies
